@@ -1,0 +1,51 @@
+/*设置字体样式*/
+html{
+  font-size: 62.5%;
+}
+body, button, input, select, textarea {
+  font-family: "Microsoft YaHei",serif;
+  line-height:1;
+  outline:none;
+  font-size: 1.6rem;
+}
+/*设置要显示选项图片的父元素样式*/
+input[type=radio] {
+  position: relative;
+  width: 18px;
+  height: 1px;
+}
+/*before伪类产生选项样式*/
+input[type=radio]::before {
+  position: absolute;
+  content: '';
+  top: -15px;
+  left: 0;
+  width: 18px;
+  height: 19px;
+  background: url(input.png) no-repeat;
+  background-position: 0 0;
+  border-radius: 50%;
+}
+input[type=radio]:checked::before {
+  background: url(input.png) no-repeat;
+  background-position: -19px 0;
+}
+input[type=checkbox]{
+  position: relative;
+  width: 18px;
+  height: 1px;
+}
+input[type=checkbox]::before {
+  position: absolute;
+  content: '';
+  top: -15px;
+  left: 0;
+  width: 1.78rem;
+  height: 19px;
+  background: url(input.png) no-repeat;
+  background-position: 0 -19px;
+}
+input[type=checkbox]:checked::before {
+  background: url(input.png) no-repeat;
+  background-position: -1.78rem -19px;
+}
