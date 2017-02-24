@@ -8,8 +8,8 @@ var li = document.getElementsByTagName("li");
 panel.oncontextmenu = function openMenu(e) {
     var x = e.pageX; //鼠标相对于页面位置
     var y = e.pageY;
-    var wdt = document.body.scrollWidth; //获取页面宽高
-    var hgt  = document.body.scrollHeight;
+    var wdt = window.innerWidth; //获取页面宽高
+    var hgt  = window.innerHeight;
     console.log(hgt);
     event.returnValue = false; //屏蔽页面右键菜单
     menu.style.visibility = "visible";
