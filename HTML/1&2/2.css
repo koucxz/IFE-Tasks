@@ -1,0 +1,154 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  font-family: "Microsoft YaHei", serif;
+  background: #dedede;
+}
+img {
+  padding: 15px 0;
+  max-width: 100%;
+}
+
+header {
+  height: 60px;
+  background: #333;
+}
+header h1 {
+  float: left;
+  line-height: 1.8;
+  color: white;
+  padding-left: 20px;
+}
+header ul {
+  float: right;
+  padding-right: 10px;
+  list-style: none;
+}
+header ul li {
+  text-align: center;
+  width: 70px;
+  float: left;
+  padding: 19px 10px;
+}
+header ul li a {
+  color: white;
+  font-size: 12px;
+  text-decoration: none;
+}
+header ul li:hover{
+  border-bottom: 2px solid white;
+  background: #474747;
+}
+
+article, aside {
+  margin: 30px 30px 0;
+  padding: 20px;
+  background: white;
+  box-shadow: 1px 1px 2px 1px #848484;
+}
+article h2 {
+  padding: 5px 0;
+}
+article h3 {
+  padding: 10px 0;
+  color: #808080;
+  font-size: 16px;
+}
+article h4 {
+  padding-bottom: 10px;
+  color: #808080;
+  font-size: 12px;
+}
+article > img {
+  width: 30%;
+}
+article a {
+  color: blue;
+  text-decoration: none;
+}
+article a:hover {
+  color: blue;
+  text-decoration: underline;
+}
+
+article ul {
+  padding-left: 20px;
+  list-style: none;
+}
+
+article ul li {
+  margin: 15px;
+  width: 10%;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+article ul li img {
+  padding: 8px 0;
+  margin: 0 auto;
+  width: 80%;
+}
+
+article ol {
+  margin: 10px 40px;
+}
+article table {
+  width: 100%;
+  text-indent: 5px;
+  border-collapse: collapse;/*设置表格的边框被合并为一个单一的边框*/
+}
+
+article table tr th {
+  color: white;
+  background: #333;
+}
+article table tr td {
+  border: 1px solid #ccc;
+}
+article table tr:last-child {
+  background:#ccc;
+}
+
+aside h2 {
+  padding-left: 10px;
+  border-left: 3px solid #ccc;
+}
+aside form {
+  width: 100%;
+}
+aside form label{
+  float: left;
+  display: inline-block;
+  text-align: right;
+  width: 35%;
+}
+aside form p{
+  margin-left: 35.2%;
+  font-size: 12px;
+  color: #aaa;
+}
+aside textarea {
+  width: 50%;
+  height: 100px;
+}
+aside input[type=submit] {
+  width:100%;
+  height:40px;
+  border-radius: 10px;
+  background: #276ddc;
+  color: white;
+  font-size: 19px;
+  border:none;
+  outline: none;
+}
+
+footer{
+  width:100%;
+  height:50px;
+  background:black;
+  color:white;
+  text-align:center;
+  line-height:50px;
+  font-size:14px;
+}
