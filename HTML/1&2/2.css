@@ -133,22 +133,22 @@ aside textarea {
   height: 100px;
 }
 aside input[type=submit] {
-  width:100%;
-  height:40px;
+  width: 100%;
+  height: 40px;
   border-radius: 10px;
   background: #276ddc;
   color: white;
   font-size: 19px;
-  border:none;
+  border: none;
   outline: none;
 }
 
-footer{
-  width:100%;
-  height:50px;
-  background:black;
-  color:white;
-  text-align:center;
-  line-height:50px;
-  font-size:14px;
+footer {
+  width: 100%;
+  height: 50px;
+  background: black;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  font-size: 14px;
 }
