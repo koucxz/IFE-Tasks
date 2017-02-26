@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+}
+.rectangle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -100px 0 0 -200px;
+  width: 400px;
+  height: 200px;
+  background: #ccc;
+}
+.q-circle-br {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 50px 0 0 150px;
+  width: 50px;
+  height: 50px;
+  border-top-left-radius: 50px;
+  background: #fc0;
+}
+.q-circle-tl {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  border-bottom-right-radius: 50px;
+  background: #fc0;
+}
