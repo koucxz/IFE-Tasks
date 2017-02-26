@@ -4,6 +4,7 @@ h1,h2,h3,h4,p,body,ul {
 }
 body{
   font-family: "Microsoft YaHei", serif;
+  min-width: 720px;
   background: #dedede;
 }
 img {
@@ -27,10 +28,12 @@ header ul {
   list-style: none;
 }
 header ul li {
+  padding: 19px 10px 0;
   text-align: center;
-  width: 70px;
+  width: 90px;
+  height: 60px;
   float: left;
-  padding: 19px 10px;
+  box-sizing: border-box;
 }
 header ul li a {
   color: white;
@@ -42,8 +45,8 @@ header ul li:hover{
   background: #474747;
 }
 
-article, aside {
-  margin: 30px;
+article {
+  margin: 30px 450px 30px 30px;
   padding: 20px;
   background: white;
   box-shadow: 1px 1px 2px 1px #848484;
@@ -76,11 +79,15 @@ article a:hover {
 article ul {
   padding-left: 20px;
   list-style: none;
+  overflow: auto;
+  zoom: 1;
 }
 
 article ul li {
+  float: left;
   margin: 15px;
   width: 150px;
+  height: 122px;
   text-align: center;
   border: 1px solid #ccc;
 }
@@ -91,7 +98,7 @@ article ul li img {
 }
 
 article ol {
-  margin: 10px 40px;
+  margin: 10px 0;
 }
 article table {
   width: 100%;
@@ -110,8 +117,17 @@ article table tr:last-child {
   background:#ccc;
 }
 
+aside {
+  float: right;
+  padding: 20px;
+  margin: 30px;
+  width: 360px;
+  background: white;
+  box-shadow: 1px 1px 2px 1px #848484;
+}
 aside h2 {
-  padding-left: 10px;
+  padding: 5px 0 5px 10px;
+  font-size: 18px;
   border-left: 3px solid #ccc;
 }
 aside form {
@@ -122,15 +138,14 @@ aside form label{
   float: left;
   display: inline-block;
   text-align: right;
-  width: 35%;
+  width: 150px;
 }
 aside form p{
-  margin-left: 35.2%;
+  margin-left: 151px;
   font-size: 12px;
   color: #aaa;
 }
 aside textarea {
-  width: 50%;
   height: 100px;
 }
 aside input[type=submit] {
@@ -148,7 +163,7 @@ footer {
   width: 100%;
   height: 50px;
   background: black;
-  color: #fff;
+  color: white;
   text-align: center;
   line-height: 50px;
   font-size: 14px;
