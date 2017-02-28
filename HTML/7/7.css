@@ -184,6 +184,7 @@
   position: relative;
 }
 .about-down div ul{
+  visibility: hidden;
   position: absolute;
   list-style: none;
   background-color: #e3e3e4;
@@ -210,6 +211,9 @@
   height: 36px;
   border: none;
   font-family: "微软雅黑"
+}
+.about-down div input:nth-of-type(2):focus ~ ul {
+  visibility: visible;
 }
 
 .about-down div .sel{
