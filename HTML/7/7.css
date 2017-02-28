@@ -5,7 +5,7 @@
 .container{
   min-width: 1280px;
 }
-.header{
+header{
   height: 55px;
   background-color: #ffffff;
 }
@@ -21,9 +21,7 @@
   vertical-align: middle;
   margin-right: 13px;
 }
-.logo p{
 
-}
 .nav{
   float: right;
   margin-right: 14px
