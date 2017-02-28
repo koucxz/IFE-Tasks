@@ -39,7 +39,7 @@
 
 }
 .nav ul>li:nth-child(6){
-  background-image: url("images/header_2.jpg");
+  background-image: url("img/header_2.jpg");
   background-repeat: no-repeat;
   background-position: 18px 18px;
 }
@@ -61,7 +61,7 @@
 }
 .feature-wrap{
   height: 690px;
-  background-image: url("images/section_1.jpg");
+  background-image: url("img/section_1.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -106,22 +106,22 @@
   position: relative;
 }
 .feature-list div:nth-of-type(1){
-  background-image: url(images/circle.png);
+  background-image: url(img/circle.png);
   background-repeat: no-repeat;
   background-position: center 43px;
 }
 .feature-list div:nth-of-type(2){
-  background-image: url(images/flag.png);
+  background-image: url(img/flag.png);
   background-repeat: no-repeat;
   background-position: center 43px;
 }
 .feature-list div:nth-of-type(3){
-  background-image: url(images/flower.png);
+  background-image: url(img/flower.png);
   background-repeat: no-repeat;
   background-position: center 43px;
 }
 .feature-list div:nth-of-type(4){
-  background-image: url(images/square.png);
+  background-image: url(img/square.png);
   background-repeat: no-repeat;
   background-position: center 43px;
 }
@@ -156,7 +156,7 @@
 .about-down{
   height: 290px;
   padding-top: 50px;
-  background-image: url("images/map.jpg");
+  background-image: url("img/map.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   font-family: "微软雅黑";
@@ -202,7 +202,7 @@
 .about-down div ul li:hover{
   background-color: #be4e48;
   color: #ffffff;
-  background-image: url("images/swosh.png");
+  background-image: url("img/swosh.png");
   background-repeat: no-repeat;
   background-position: 10px center;
 }
@@ -221,7 +221,7 @@
   padding-left: 12px;
   width: 225px;
   font-size: 12px;
-  background-image: url("images/red-arrow.png");
+  background-image: url("img/red-arrow.png");
   background-repeat: no-repeat;
   background-position: 210px center;
 }
@@ -295,7 +295,7 @@
 }
 .middle-left{
   width: 66.6%;
-  background-image: url("images/middle-left.jpg");
+  background-image: url("img/middle-left.jpg");
   float: left;
   height: 100%;
   background-size: cover;
@@ -317,7 +317,7 @@
   width: 33.3%;
   margin-top: 163px;
   height: 412px;
-  background-image: url("images/point.png");
+  background-image: url("img/point.png");
   background-repeat: no-repeat;
   background-position: center 300px;
 }
@@ -389,7 +389,7 @@
   border: 1px solid #ffffff;
 }
 .show-bottom div:nth-of-type(3){
-  background-image: url(images/train.png);
+  background-image: url(img/train.png);
   background-size: cover;
   padding-top: 0;
   height: 520px;
@@ -464,7 +464,7 @@
   font-family: "宋体";
   font-size: 12px;
   color: #959291;
-  background-image: url("images/arrow.png");
+  background-image: url("img/arrow.png");
   background-repeat: no-repeat;
   background-position: 253px 5px;
 }
