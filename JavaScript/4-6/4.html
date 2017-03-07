@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>基础JavaScript练习</title>
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+        input[type="number"]{
+            -moz-appearance: textfield;
+        }
+        ul {
+            padding: 0;
+        }
+        li {
+            float: left;
+            padding: 10px 15px;
+            margin-right: 5px;
+            text-align: center;
+            background: red;
+            color: white;
+            list-style: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<input type="number" id="num-in">
+<button id="left-in">左侧入</button>
+<button id="right-in">右侧入</button>&emsp;
+<button id="left-out">左侧出</button>
+<button id="right-out">右侧出</button>
+<ul id="output"></ul>
+<script>
+    var numIn = document.getElementById("num-in"),
+        leftIn = document.getElementById("left-in"),
+        rightIn = document.getElementById("right-in"),
+        leftOut = document.getElementById("left-out"),
+        rightOut = document.getElementById("right-out"),
+        buttons = document.getElementsByTagName("button"),
+        output = document.getElementById("output"),
+        liArr = [];
+
+    leftIn.onclick = function() {if (numIn.value != "") {liArr.unshift(numIn.value)}};
+    rightIn.onclick = function() {if (numIn.value != "") {liArr.push(numIn.value)}};
+    leftOut.onclick = function() {liArr.shift()};
+    rightOut.onclick = function() {liArr.pop()};
+
+    function createLi() {
+        for (var i = 0; i < liArr.length; i++) {
+            var li = document.createElement("li");
+            li.innerHTML = liArr[i];
+            output.appendChild(li);
+        }
+    }
+    function refreshLi() {
+        if (numIn.value != "") {
+            output.innerHTML = "";
+            createLi();
+        }
+    }
+
+    output.onmousedown = function () {
+        var oli = document.getElementsByTagName('li');
+        for(var i=0; i<oli.length;i++)
+        {
+            oli[i].index=i;
+            oli[i].addEventListener('click',function(){
+                liArr.splice(this.index,1);
+                output.innerHTML = "";
+                createLi();
+            })
+        }
+    };
+
+    (function() {for (var i = 0;i < buttons.length;i++) {
+        buttons[i].addEventListener('click', function () {
+            refreshLi();
+        })
+    }})();
+</script>
+</body>
+</html>
