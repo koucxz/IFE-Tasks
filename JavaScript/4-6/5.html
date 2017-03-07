@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>基础JavaScript练习</title>
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+        input[type="number"]{
+            -moz-appearance: textfield;
+        }
+        ul {
+            display: flex;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            padding: 0;
+            min-height: 100px;
+        }
+        li {
+            width: 15px;
+            margin-right: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+            background: red;
+            color: white;
+            list-style: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<input type="number" id="num-in">
+<button id="left-in">左侧入</button>
+<button id="right-in">右侧入</button>&emsp;
+<button id="left-out">左侧出</button>
+<button id="right-out">右侧出</button>&emsp;
+<button id="sort">重新排序</button>
+<ul id="output"></ul>
+<script>
+    var numIn = document.getElementById("num-in"),
+        buttons = document.getElementsByTagName("button"),
+        output = document.getElementById("output"),
+        liArr = [];
+    function createLi() {
+        for (i in liArr) {
+            var li = document.createElement("li");
+            li.style.height = liArr[i] + "px";
+            li.index = i;
+            output.appendChild(li);
+            li.onclick = function () {
+                liArr.splice(this.index,1);
+                output.innerHTML = "";
+                return createLi();
+            }
+        }
+    }
+    function refreshLi() {
+        if (numIn.value != "") {
+            output.innerHTML = "";
+            createLi();
+        }
+    }
+
+    (function() {
+        buttons[0].onclick = function () {
+            if (liArr.length <= 60) {
+                if (parseInt(numIn.value) >= 10 && parseInt(numIn.value) <= 100) {
+                    liArr.unshift(parseInt(numIn.value));
+                    refreshLi();
+                }
+                else {alert("请输入10-100之间的数字")}
+            }
+            else {
+                alert("队列已达上限")
+            }
+        };
+        buttons[1].onclick = function () {
+            if (liArr.length <= 60) {
+                if (parseInt(numIn.value) >= 10 && parseInt(numIn.value) <= 100) {
+                    liArr.push(parseInt(numIn.value));
+                    refreshLi();
+                }
+                else {
+                    alert("请输入10-100之间的数字")
+                }
+            }
+            else {
+                    alert("队列已达上限")
+            }
+        };
+        buttons[2].onclick = function () {
+            liArr.shift();
+            refreshLi();
+        };
+        buttons[3].onclick = function () {
+            liArr.pop();
+            refreshLi();
+        };
+        buttons[4].onclick = function () {
+            bubbleSort(liArr);
+            refreshLi();
+        }
+    })();
+
+//冒泡排序
+    function bubbleSort(arr) {
+        var len = arr.length;
+        for (var i = 0; i < len; i++) {
+            for (var j = 0; j < len - 1 - i; j++) {
+                if (arr[j] > arr[j+1]) {        //相邻元素两两对比
+                    var temp = arr[j+1];        //元素交换
+                    arr[j+1] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+        return arr;
+    }
+
+</script>
+</body>
+</html>
