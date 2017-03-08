@@ -90,11 +90,13 @@
         };
         //查询按钮
         buttons[4].onclick = function () {
-            var searchStr = document.getElementById("search").value;
+            var searchStr = document.getElementById("search").value,
+                liTag = document.getElementsByTagName("li");
             for (var i in liArr) {
                 var bool = liArr[i].indexOf(searchStr); //设置判断liArr[i]是否包含输入的查询字符
+                liTag[i].style.background = "red";
                 if ( bool > -1 ) {
-                    document.getElementsByTagName("li")[i].style.background = "#aa2691"; //更改查询到li元素的背景色
+                    liTag[i].style.background = "#aa2691"; //更改查询到li元素的背景色
                 }
             }
         }
