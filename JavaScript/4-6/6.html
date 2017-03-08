@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>基础JavaScript练习</title>
+    <style>
+        textarea,button {
+            float: left;
+            margin-right: 5px;
+        }
+        ul {
+            padding: 0;
+        }
+        ul:before,
+        ul:after {
+            content: "";
+            display:block;
+            clear: both;
+        }
+        li {
+            float: left;
+            padding: 10px 15px;
+            margin: 5px 5px 5px 0;
+            text-align: center;
+            background: red;
+            color: white;
+            list-style: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<textarea id="num-in"></textarea>
+<button id="left-in">左侧入</button>
+<button id="right-in">右侧入</button>
+<button id="left-out">左侧出</button>
+<button id="right-out">右侧出</button>
+<button>查询</button>
+<input type="text" id="search">
+<ul id="output"></ul>
+<script>
+    var numIn = document.getElementById("num-in"),
+        buttons = document.getElementsByTagName("button"),
+        output = document.getElementById("output"),
+        liArr = [];
+    //创建li视图并对每个li绑定点击事件
+    function createLi() {
+        for (var i in liArr) {
+            var li = document.createElement("li"); //创建li节点
+            li.innerHTML = liArr[i];
+            li.index = i;   //设置li索引值
+            output.appendChild(li);
+            li.onclick = function () {
+                liArr.splice(this.index,1);     //从数组中删除鼠标点击的li对应项
+                refreshLi();
+            }
+        }
+    }
+    //更新li视图
+    function refreshLi() {
+        output.innerHTML = "";  //清空#output子节点
+        createLi();
+    }
+    //分离多个字符
+    function splitStr(str) {
+        var arr = [];
+        arr = str.split(/[^0-9a-zA-Z\u4e00-\u9fa5]+/).filter(function(e) { return e.length !== 0; });
+        return arr;
+    }
+
+    (function() {
+        buttons[0].onclick = function () {
+            var arrSp = splitStr(numIn.value);
+            liArr = arrSp.concat(liArr);
+            refreshLi();
+        };
+        buttons[1].onclick = function () {
+            var arrSp = splitStr(numIn.value);
+            splitStr(numIn.value);
+            liArr = liArr.concat(arrSp);
+            refreshLi();
+        };
+        buttons[2].onclick = function () {
+            liArr.shift();
+            refreshLi();
+        };
+        buttons[3].onclick = function () {
+            liArr.pop();
+            refreshLi();
+        };
+        buttons[4].onclick = function () {
+            var searchStr = document.getElementById("search").value;
+            for (var i in liArr) {
+                var bool = liArr[i].indexOf(searchStr);
+                if ( bool > -1 ) {
+                    document.getElementsByTagName("li")[i].style.background = "#aa2691";
+                }
+            }
+        }
+    })();
+</script>
+</body>
+</html>
