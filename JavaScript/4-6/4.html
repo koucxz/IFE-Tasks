@@ -42,32 +42,33 @@
         buttons = document.getElementsByTagName("button"),
         output = document.getElementById("output"),
         liArr = [];
-
+    //设置按键对数组的添加和删除功能
     leftIn.onclick = function() {if (numIn.value != "") {liArr.unshift(numIn.value)}};
     rightIn.onclick = function() {if (numIn.value != "") {liArr.push(numIn.value)}};
     leftOut.onclick = function() {liArr.shift();alert(output.firstChild.innerHTML);};
     rightOut.onclick = function() {liArr.pop();alert(output.lastChild.innerHTML);};
-
+    //创建ul子元素li以显示数组内容
     function createLi() {
         for (var i = 0; i < liArr.length; i++) {
-            var li = document.createElement("li");
+            var li = document.createElement("li"); //创建li节点
             li.innerHTML = liArr[i];
-            li.index = i;
+            li.index = i;   //设置li索引值
             output.appendChild(li);
             li.onclick = function () {
-                liArr.splice(this.index,1);
-                output.innerHTML = "";
+                liArr.splice(this.index,1); //从数组中删除鼠标点击的li对应项
+                output.innerHTML = "";      //更新li视图
                 return createLi();
             }
         }
     }
+    //li视图更新函数
     function refreshLi() {
         if (numIn.value != "") {
-            output.innerHTML = "";
+            output.innerHTML = "";  //清空#output子节点
             createLi();
         }
     }
-
+    //设置所有按钮点击后更新li视图
     (function() {for (var i = 0;i < buttons.length;i++) {
         buttons[i].addEventListener('click', function () {
             refreshLi();
