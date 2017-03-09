@@ -16,15 +16,14 @@
             -ms-flex-positive: 1;
             flex-grow: 1;
         }
-
         div#root {
             width: 90%;
             height: 220px;
             margin: 12% auto 20px;
         }
         .div-checked {
-             background: red;
-         }
+            background: red;
+        }
         .inorder {
             background: blue;
         }
@@ -73,12 +72,14 @@
     <button>后序</button>
     <input type="text" id="search">
     <button>搜索</button>
+    <button>搜索</button>
 </footer>
 <script>
     var btn = document.getElementsByTagName('button'),
         preBtn = btn[0],
         postBtn = btn[1],
         searchBtn = btn[2],
+        searchBtn2 = btn[3],
         treeRoot = document.getElementById('root'),
         divList = [],
         timer = null;
@@ -86,20 +87,24 @@
         preBtn.onclick = function () {
             reset();
             preOrder(treeRoot);
-            searchTree();
+            changeColor();
         };
         postBtn.onclick = function () {
             reset();
             postOrder(treeRoot);
-            searchTree();
+            changeColor();
         };
         searchBtn.onclick = function () {
             reset();
             preOrder(treeRoot);
             searchTree();
+        };
+        searchBtn2.onclick = function () {
+            reset();
+            postOrder(treeRoot);
+            searchTree();
         }
     };
-
     //前序遍历
     function preOrder(node) {
         if (node!=null){
@@ -111,7 +116,6 @@
             }
         }
     }
-
     //后序遍历
     function postOrder(node) {
         for(var i=0;i<node.children.length;i++){
@@ -122,7 +126,25 @@
         divList.push(node);
     }
 
-    //搜索与改变颜色功能
+    //颜色变化函数
+    function changeColor() {
+        var i = 0;
+        addClass(divList[i],'inorder');
+        removeClass(divList[i],'reset');
+        timer = setInterval(function () {
+            i++;
+            if (i < divList.length) {
+                removeClass(divList[i-1],'inorder');
+                addClass(divList[i],'inorder');
+                removeClass(divList[i],'reset');
+            } else {
+                clearInterval(timer);
+                removeClass(divList[i-1],'inorder');
+            }
+        },500)
+    }
+
+    //搜索函数
     function searchTree() {
         var i = 0,
             bool = true,
@@ -158,11 +180,10 @@
                     if (bool == true) {
                         alert("未搜索到该内容");
                     }
-                },5)
+                },10)
             }
-        },1000)
+        },500)
     }
-
     //初始化样式
     function reset() {
         divList = [];
@@ -172,7 +193,6 @@
             divs[i].className = "reset";
         }
     }
-
     //样式改变
     function addClass(obj, cls){
         var obj_class = obj.className,//获取 class 内容.
@@ -180,11 +200,10 @@
             added = obj_class + blank + cls;//组合原来的 class 和需要添加的 class.
         obj.className = added;//替换原来的 class.
     }
-
     function removeClass(obj, cls){
         var obj_class = ' '+obj.className+' ';//获取 class 内容, 并在首尾各加一个空格. ex) 'abc bcd' -> ' abc bcd '
         obj_class = obj_class.replace(/(\s+)/gi, ' '),//将多余的空字符替换成一个空格. ex) ' abc bcd ' -> ' abc bcd '
-        removed = obj_class.replace(' '+cls+' ', ' ');//在原来的 class 替换掉首尾加了空格的 class. ex) ' abc bcd ' -> 'bcd '
+            removed = obj_class.replace(' '+cls+' ', ' ');//在原来的 class 替换掉首尾加了空格的 class. ex) ' abc bcd ' -> 'bcd '
         removed = removed.replace(/(^\s+)|(\s+$)/g, '');//去掉首尾空格. ex) 'bcd ' -> 'bcd'
         obj.className = removed;//替换原来的 class.
     }
