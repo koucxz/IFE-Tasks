@@ -86,17 +86,17 @@
         preBtn.onclick = function () {
             reset();
             preOrder(treeRoot);
-            changeColor();
+            searchTree();
         };
         postBtn.onclick = function () {
             reset();
             postOrder(treeRoot);
-            changeColor();
+            searchTree();
         };
         searchBtn.onclick = function () {
             reset();
             preOrder(treeRoot);
-            searchTree(treeRoot);
+            searchTree();
         }
     };
 
@@ -121,13 +121,16 @@
         }
         divList.push(node);
     }
-    //搜索功能
-    function searchTree(node) {
+
+    //搜索与改变颜色功能
+    function searchTree() {
         var i = 0,
+            bool = true,
             searchText = document.getElementById('search').value;
-        if (divList[i].firstChild.nodeValue.indexOf(searchText) > -1) {
+        if (searchText != "" && divList[i].firstChild.nodeValue.indexOf(searchText) > -1) {
             addClass(divList[i],'div-checked');
             removeClass(divList[i],'reset');
+            bool = false;
         }
         else {
             addClass(divList[i],'inorder');
@@ -136,38 +139,26 @@
         timer = setInterval(function () {
             i++;
             if (i < divList.length) {
-                if (divList[i-1].firstChild.nodeValue.indexOf(searchText) == -1) {
+                if (searchText == "" || divList[i-1].firstChild.nodeValue.indexOf(searchText) == -1) {
                     addClass(divList[i-1],'reset');
                 }
-                if (divList[i].firstChild.nodeValue.indexOf(searchText) > -1) {
+                if (searchText.length > 0 && divList[i].firstChild.nodeValue.indexOf(searchText) > -1) {
                     addClass(divList[i],'div-checked');
                     removeClass(divList[i],'reset');
+                    bool = false;
                 }
                 else {
                     addClass(divList[i],'inorder');
                     removeClass(divList[i],'reset');
                 }
             } else {
+                removeClass(divList[i-1],'inorder');
                 clearInterval(timer);
-                removeClass(divList[i],'inorder');
-            }
-        },1000)
-    }
-
-    //颜色变化函数
-    function changeColor() {
-        var i = 0;
-        addClass(divList[i],'inorder');
-        removeClass(divList[i],'reset');
-        timer = setInterval(function () {
-            i++;
-            if (i < divList.length) {
-                addClass(divList[i-1],'reset');
-                addClass(divList[i],'inorder');
-                removeClass(divList[i],'reset');
-            } else {
-                clearInterval(timer);
-                addClass(divList[i-1],'reset');
+                setTimeout(function () {
+                    if (bool == true) {
+                        alert("未搜索到该内容");
+                    }
+                },5)
             }
         },1000)
     }
