@@ -174,7 +174,9 @@
                     removeClass(divList[i],'reset');
                 }
             } else {
-                removeClass(divList[i-1],'inorder');
+                if (searchText == "" || divList[i-1].firstChild.nodeValue.indexOf(searchText) == -1) {
+                    addClass(divList[i-1],'reset');
+                }
                 clearInterval(timer);
                 setTimeout(function () {
                     if (bool == true) {
