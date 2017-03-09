@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript和树</title>
+    <style>
+        body {min-width: 1200px;}
+        div {
+            border: 2px solid gray;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            padding: 20px 1px;
+            margin: 2px;
+            -webkit-flex-grow: 1;
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+        }
+
+        div#root {
+            width: 90%;
+            height: 220px;
+            margin: 12% auto 20px;
+        }
+        .div-checked {
+             background: red;
+         }
+        .inorder {
+            background: blue;
+        }
+        .reset {
+            background: #fff;
+        }
+        footer {text-align: center}
+        button {
+            width: 80px;
+            margin: 0 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="root">Super
+    <div>Car
+        <div>Apple
+            <div>Pear</div>
+            <div>Pig</div>
+            <div>Cola</div>
+            <div>Soccer</div>
+        </div>
+        <div>Phone</div>
+        <div>
+            <div>Book</div>
+            <div>School</div>
+        </div>
+    </div>
+    <div>Note
+        <div>Human
+            <div>Code</div>
+            <div>Operate</div>
+            <div>Man</div>
+        </div>
+        <div>Program
+            <div>Element
+                <div>Cat</div>
+            </div>
+            <div>Glass</div>
+        </div>
+    </div>
+    <div>Fish</div>
+</div>
+<footer>
+    <button>前序</button>
+    <button>后序</button>
+    <input type="text" id="search">
+    <button>搜索</button>
+</footer>
+<script>
+    var btn = document.getElementsByTagName('button'),
+        preBtn = btn[0],
+        postBtn = btn[1],
+        searchBtn = btn[2],
+        treeRoot = document.getElementById('root'),
+        divList = [],
+        timer = null;
+    window.onload = function (){
+        preBtn.onclick = function () {
+            reset();
+            preOrder(treeRoot);
+            changeColor();
+        };
+        postBtn.onclick = function () {
+            reset();
+            postOrder(treeRoot);
+            changeColor();
+        };
+        searchBtn.onclick = function () {
+            reset();
+            preOrder(treeRoot);
+            searchTree(treeRoot);
+        }
+    };
+
+    //前序遍历
+    function preOrder(node) {
+        if (node!=null){
+            divList.push(node);
+            for(var i=0;i<node.children.length;i++){
+                if (node.children[i].nodeType==1){
+                    preOrder(node.children[i]);
+                }
+            }
+        }
+    }
+
+    //后序遍历
+    function postOrder(node) {
+        for(var i=0;i<node.children.length;i++){
+            if (node.children[i].nodeType==1){
+                postOrder(node.children[i]);
+            }
+        }
+        divList.push(node);
+    }
+    //搜索功能
+    function searchTree(node) {
+        var i = 0,
+            searchText = document.getElementById('search').value;
+        if (divList[i].firstChild.nodeValue.indexOf(searchText) > -1) {
+            addClass(divList[i],'div-checked');
+            removeClass(divList[i],'reset');
+        }
+        else {
+            addClass(divList[i],'inorder');
+            removeClass(divList[i],'reset');
+        }
+        timer = setInterval(function () {
+            i++;
+            if (i < divList.length) {
+                if (divList[i-1].firstChild.nodeValue.indexOf(searchText) == -1) {
+                    addClass(divList[i-1],'reset');
+                }
+                if (divList[i].firstChild.nodeValue.indexOf(searchText) > -1) {
+                    addClass(divList[i],'div-checked');
+                    removeClass(divList[i],'reset');
+                }
+                else {
+                    addClass(divList[i],'inorder');
+                    removeClass(divList[i],'reset');
+                }
+            } else {
+                clearInterval(timer);
+                removeClass(divList[i],'inorder');
+            }
+        },1000)
+    }
+
+    //颜色变化函数
+    function changeColor() {
+        var i = 0;
+        addClass(divList[i],'inorder');
+        removeClass(divList[i],'reset');
+        timer = setInterval(function () {
+            i++;
+            if (i < divList.length) {
+                addClass(divList[i-1],'reset');
+                addClass(divList[i],'inorder');
+                removeClass(divList[i],'reset');
+            } else {
+                clearInterval(timer);
+                addClass(divList[i-1],'reset');
+            }
+        },1000)
+    }
+
+    //初始化样式
+    function reset() {
+        divList = [];
+        clearInterval(timer);
+        var divs = document.getElementsByTagName('div');
+        for (var i = 0; i < divs.length; i++) {
+            divs[i].className = "reset";
+        }
+    }
+
+    //样式改变
+    function addClass(obj, cls){
+        var obj_class = obj.className,//获取 class 内容.
+            blank = (obj_class != '') ? ' ' : '',//判断获取到的 class 是否为空, 如果不为空在前面加个'空格'.
+            added = obj_class + blank + cls;//组合原来的 class 和需要添加的 class.
+        obj.className = added;//替换原来的 class.
+    }
+
+    function removeClass(obj, cls){
+        var obj_class = ' '+obj.className+' ';//获取 class 内容, 并在首尾各加一个空格. ex) 'abc bcd' -> ' abc bcd '
+        obj_class = obj_class.replace(/(\s+)/gi, ' '),//将多余的空字符替换成一个空格. ex) ' abc bcd ' -> ' abc bcd '
+        removed = obj_class.replace(' '+cls+' ', ' ');//在原来的 class 替换掉首尾加了空格的 class. ex) ' abc bcd ' -> 'bcd '
+        removed = removed.replace(/(^\s+)|(\s+$)/g, '');//去掉首尾空格. ex) 'bcd ' -> 'bcd'
+        obj.className = removed;//替换原来的 class.
+    }
+</script>
+</body>
+</html>
