@@ -32,7 +32,7 @@
         }
         footer {text-align: center}
         button {
-            width: 80px;
+            width: 120px;
             margin: 0 20px;
         }
     </style>
@@ -68,11 +68,11 @@
     <div>Fish</div>
 </div>
 <footer>
-    <button>前序遍历</button>
-    <button>后序遍历</button>
+    <button>深度优先遍历</button>
+    <button>广度优先遍历</button>
     <input type="text" id="search">
-    <button>前序搜索</button>
-    <button>后序搜索</button>
+    <button>深度优先搜索</button>
+    <button>广度优先搜索</button>
 </footer>
 <script>
     var btn = document.getElementsByTagName('button'),
@@ -91,7 +91,7 @@
         };
         postBtn.onclick = function () {
             reset();
-            postOrder(treeRoot);
+            wideFirst(treeRoot);
             changeColor();
         };
         searchBtn.onclick = function () {
@@ -101,11 +101,11 @@
         };
         searchBtn2.onclick = function () {
             reset();
-            postOrder(treeRoot);
+            wideFirst(treeRoot);
             searchTree();
         }
     };
-    //前序遍历
+    //深度优先遍历
     function preOrder(node) {
         if (node!=null){
             divList.push(node);
@@ -116,16 +116,25 @@
             }
         }
     }
-    //后序遍历
-    function postOrder(node) {
-        for(var i=0;i<node.children.length;i++){
-            if (node.children[i].nodeType==1){
-                postOrder(node.children[i]);
+    //广度优先遍历
+    function wideFirst(node) {
+        divList.push(node);
+        var stack = [];
+        for (var i = 0, len = node.children.length; i < len; i++) {
+            stack.push(node.children[i]);
+        }
+        var item = [];
+        while (stack.length) {
+            item = stack.shift();
+            divList.push(item);
+            //如果该节点有子节点，继续添加进入栈底
+            if (item.children && item.children.length) {
+                for(var j=0;j<item.children.length;j++){
+                    stack.push(item.children[j]);
+                }
             }
         }
-        divList.push(node);
     }
-
     //颜色变化函数
     function changeColor() {
         var i = 0;
