@@ -98,25 +98,43 @@
             refreshLi();
         };
         buttons[4].onclick = function () {
-            bubbleSort(liArr);
+            liArr = quickSort(liArr);
             refreshLi();
         }
     })();
 
 //冒泡排序
-    function bubbleSort(arr) {
-        var len = arr.length;
-        for (var i = 0; i < len; i++) {
-            for (var j = 0; j < len - 1 - i; j++) {
-                if (arr[j] > arr[j+1]) {        //相邻元素两两对比
-                    var temp = arr[j+1];        //元素交换
-                    arr[j+1] = arr[j];
-                    arr[j] = temp;
-                }
+//    function bubbleSort(arr) {
+//        var len = arr.length;
+//        for (var i = 0; i < len; i++) {
+//            for (var j = 0; j < len - 1 - i; j++) {
+//                if (arr[j] > arr[j+1]) {        //相邻元素两两对比
+//                    var temp = arr[j+1];        //元素交换
+//                    arr[j+1] = arr[j];
+//                    arr[j] = temp;
+//                }
+//            }
+//        }
+//        return arr;
+//    }
+    //快速排序
+    var quickSort = function(arr) {
+        if (arr.length <= 1) { return arr; }
+        var pivotIndex = Math.floor(arr.length / 2);
+        var pivot = arr.splice(pivotIndex, 1)[0];
+        var left = [];
+        var right = [];
+        for (var i = 0; i < arr.length; i++){
+            if (arr[i] < pivot) {
+                left.push(arr[i]);
+                console.log(left);
+            } else {
+                right.push(arr[i]);
+                console.log(right);
             }
         }
-        return arr;
-    }
+        return quickSort(left).concat(pivot, quickSort(right));
+    };
 </script>
 </body>
 </html>
