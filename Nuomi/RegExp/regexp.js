@@ -19,8 +19,6 @@ function isRepeat(str) {
     return reg.test(str);
 }
 
-
-
 var telInput =document.getElementById('telInput');
 var telResult =document.getElementById('telResult');
 
