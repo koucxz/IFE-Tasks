@@ -314,7 +314,7 @@ header a > span {
   text-align: center;
   cursor: pointer;
 }
-.price-list li:hover::after,.price-list li.cur::after{
+.price-list li:hover::after,.price-list li.cur::after {
   content:'';
   position:absolute;
   top:-1px;
@@ -323,7 +323,7 @@ header a > span {
   height:4px;
   background:#4388c9;
 }
-.price-list li time{
+.price-list li time {
   display: block;
   line-height: 12px;
   color:#323333;
