@@ -30,10 +30,16 @@
         .reset {
             background: #fff;
         }
+        .selected {
+            background: yellow;
+        }
         footer {text-align: center}
         button {
             width: 120px;
             margin: 0 20px;
+        }
+        button.btn-long {
+            width: 200px;
         }
     </style>
 </head>
@@ -73,6 +79,11 @@
     <input type="text" id="search">
     <button>深度优先搜索</button>
     <button>广度优先搜索</button>
+    <br/>
+    <br/>
+    <button class="btn-long">对选中节点增加子节点</button>
+    <input type="text" id="insert">
+    <button  class="btn-long">删除选中节点及其子节点</button>
 </footer>
 <script>
     var btn = document.getElementsByTagName('button'),
@@ -80,6 +91,8 @@
         postBtn = btn[1],
         searchBtn = btn[2],
         searchBtn2 = btn[3],
+        addBtn = btn[4],
+        deleteBtn = btn[5],
         treeRoot = document.getElementById('root'),
         divList = [],
         timer = null;
@@ -103,6 +116,55 @@
             reset();
             wideFirst(treeRoot);
             searchTree();
+        };
+
+        //点击相应的box背景变色
+        var selectDiv;//记录选中的box
+        var divs = document.getElementsByTagName('div');
+        for (var i = 0; i < divs.length; i++) {
+            divs[i].onclick = function(e) {
+                reset();
+                addClass(this,'selected');
+                e.stopPropagation();//阻止事件冒泡
+                selectDiv = this;
+            };
+        }
+
+        //删除选中box及其子节点
+        deleteBtn.onclick  = function(){
+            if(selectDiv === undefined){
+                alert('请先选中要删除的节点');
+            }else{
+                var parent = selectDiv.parentNode;
+                parent.removeChild(selectDiv);
+            }
+        };
+
+        //在选中节点下增加子节点
+        addBtn.onclick = function(){
+            var content = document.getElementById('insert').value;
+            if(content === ''){
+                alert('请填写新增节点的内容');
+            }else if(selectDiv === undefined){
+                alert('请先选中要操作的节点');
+            }else{
+
+                var newDiv = document.createElement('div');
+                newDiv.innerHTML = content;
+                newDiv.className = 'reset';
+                selectDiv.appendChild(newDiv);
+
+                //更新点击事件
+                divs = document.getElementById('box-container').getElementsByTagName('div');
+                for (var i = 0; i < divs.length; i++) {
+                    divs[i].onclick = function(e) {
+                        reset();
+                        addClass(this,'selected');
+                        e.stopPropagation();//阻止事件冒泡
+                        selectDiv = this;
+                    };
+                }
+            }
         }
     };
     //深度优先遍历
