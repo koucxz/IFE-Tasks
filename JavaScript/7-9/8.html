@@ -119,13 +119,13 @@
     //广度优先遍历
     function wideFirst(node) {
         divList.push(node);
-        var stack = [];
-        for (var i = 0, len = node.children.length; i < len; i++) {
+        var stack = [];     //参考栈方法声明一个空数组作为栈
+        for (var i = 0; i < node.children.length; i++) {    //将当前节点的子节点存入stack
             stack.push(node.children[i]);
         }
-        var item = [];
+        var item = [];  //声明item，用于保存当前节点
         while (stack.length) {
-            item = stack.shift();
+            item = stack.shift();   //返回当前stack第一个节点
             divList.push(item);
             //如果该节点有子节点，继续添加进入栈底
             if (item.children && item.children.length) {
