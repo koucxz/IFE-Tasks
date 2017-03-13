@@ -40,11 +40,11 @@ function addEvent(dom,type,fn){
 addEvent(telInput,'change',function () {
     var telVal = telInput.value;
 
-    telResult.innerHTML = isTel(telVal) ? 'True':'False';
-})
+    telResult.innerHTML = isTel(telVal) ? '输入正确':'请输入一个正确的手机号码';
+});
 
 addEvent(strInput,'change',function () {
     var strVal = strInput.value;
     console.log(strVal);
-    strResult.innerHTML = isRepeat(strVal) ? 'True':'False';
+    strResult.innerHTML = isRepeat(strVal) ? '发现相邻重复单词':'未发现相邻重复单词';
 });
