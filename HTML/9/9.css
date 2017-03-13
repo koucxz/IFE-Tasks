@@ -230,7 +230,7 @@ header a > span {
 
 .content-project{width:121px;margin-right: 29px;}
 .content-people{width:190px;margin-right: 32px;}
-.content-people>div{width:161px;}
+.content-people > div{width:161px;}
 .change{
   float:left;
   padding-left: 14px;
