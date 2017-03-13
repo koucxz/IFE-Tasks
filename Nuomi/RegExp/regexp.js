@@ -25,8 +25,6 @@ var telResult =document.getElementById('telResult');
 var strInput =document.getElementById('strInput');
 var strResult =document.getElementById('strResult');
 
-
-
 function addEvent(dom,type,fn){
     if(dom.addEventListener){
         dom.addEventListener(type,fn,false);
