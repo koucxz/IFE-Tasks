@@ -88,7 +88,7 @@
 <script>
     var btn = document.getElementsByTagName('button'),
         preBtn = btn[0],
-        postBtn = btn[1],
+        wideFBtn = btn[1],
         searchBtn = btn[2],
         searchBtn2 = btn[3],
         addBtn = btn[4],
@@ -98,34 +98,38 @@
         timer = null;
     window.onload = function (){
         preBtn.onclick = function () {
+            selectDiv = null;   //遍历开始时清除this指针
             reset();
             preOrder(treeRoot);
             changeColor();
         };
-        postBtn.onclick = function () {
+        wideFBtn.onclick = function () {
+            selectDiv = null;
             reset();
             wideFirst(treeRoot);
             changeColor();
         };
         searchBtn.onclick = function () {
+            selectDiv = null;
             reset();
             preOrder(treeRoot);
             searchTree();
         };
         searchBtn2.onclick = function () {
+            selectDiv = null;
             reset();
             wideFirst(treeRoot);
             searchTree();
         };
 
         //点击相应的box背景变色
-        var selectDiv;//记录选中的box
+        var selectDiv;  //记录选中的box
         var divs = document.getElementsByTagName('div');
         for (var i = 0; i < divs.length; i++) {
             divs[i].onclick = function(e) {
                 reset();
                 addClass(this,'selected');
-                e.stopPropagation();//阻止事件冒泡
+                e.stopPropagation();    //阻止事件冒泡
                 selectDiv = this;
             };
         }
@@ -155,7 +159,6 @@
                 selectDiv.appendChild(newDiv);
 
                 //更新点击事件
-                divs = document.getElementById('box-container').getElementsByTagName('div');
                 for (var i = 0; i < divs.length; i++) {
                     divs[i].onclick = function(e) {
                         reset();
@@ -222,14 +225,12 @@
             searchText = document.getElementById('search').value;
         if (searchText == "") {
             alert('请输入要搜索的内容');
-        }
-        else {
+        } else {
             if (divList[i].firstChild.nodeValue.indexOf(searchText) > -1) {
                 addClass(divList[i],'div-checked');
                 removeClass(divList[i],'reset');
                 bool = false;
-            }
-            else {
+            } else {
                 addClass(divList[i],'inorder');
                 removeClass(divList[i],'reset');
             }
