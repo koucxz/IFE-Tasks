@@ -98,7 +98,6 @@
         timer = null;
     window.onload = function (){
         preBtn.onclick = function () {
-            selectDiv = null;   //遍历开始时清除this指针
             reset();
             preOrder(treeRoot);
             changeColor();
@@ -110,13 +109,11 @@
             changeColor();
         };
         searchBtn.onclick = function () {
-            selectDiv = null;
             reset();
             preOrder(treeRoot);
             searchTree();
         };
         searchBtn2.onclick = function () {
-            selectDiv = null;
             reset();
             wideFirst(treeRoot);
             searchTree();
@@ -147,11 +144,11 @@
         //在选中节点下增加子节点
         addBtn.onclick = function(){
             var content = document.getElementById('insert').value;
-            if(content === ''){
+            if (content === '') {
                 alert('请填写新增节点的内容');
-            }else if(selectDiv === undefined){
+            } else if (selectDiv === undefined) {
                 alert('请先选中要操作的节点');
-            }else{
+            } else {
 
                 var newDiv = document.createElement('div');
                 newDiv.innerHTML = content;
