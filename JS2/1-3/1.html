@@ -42,7 +42,7 @@
     <p id="tip">必填，长度为4~16个字符</p>
 <script>
     var inputName = document.getElementsByTagName("input")[0],
-        hintText = document.getElementById("tip");
+        tipWord = document.getElementById("tip");
     document.getElementsByTagName("input")[1].onclick = test;   //点击按钮触发验证事件
 
     //input内回车绑定验证事件
@@ -55,16 +55,16 @@
     function test() {
         var inputValue = inputName.value;
         if (countLength(inputValue) == 0) {     //空字符串提示
-            hintText.innerHTML = "姓名不能为空";
-            hintText.style.color = "red";
+            tipWord.innerHTML = "姓名不能为空";
+            tipWord.style.color = "red";
             inputName.style.border = "1px solid red";
         } else if (countLength(inputValue) >=4 && countLength(inputValue) <= 16) {  //字符串长度在4-16之间提示
-            hintText.innerHTML = "格式正确";
-            hintText.style.color = "lightgreen";
+            tipWord.innerHTML = "格式正确";
+            tipWord.style.color = "lightgreen";
             inputName.style.border = "1px solid #0f0";
         } else {    //字符串长度不在4-16之间提示
-            hintText.innerHTML = "请输入长度为4~16位字符";
-            hintText.style.color = "red";
+            tipWord.innerHTML = "请输入长度为4~16位字符";
+            tipWord.style.color = "red";
             inputName.style.border = "1px solid red";
         }
     }
