@@ -6,7 +6,7 @@
     <style>
         body {
             width: 100%;
-            font-family: 'Microsoft Yahei',Arial,sans-serif;
+            font-family: "Microsoft Yahei",Arial,sans-serif;
         }
         input {
             font-size: 1rem;
@@ -37,43 +37,46 @@
 </head>
 <body>
     名称
-    <input id='msg' type="text">
+    <input id="msg" type="text">
     <input type="button" value="验证">
     <p id="tip">必填，长度为4~16个字符</p>
 <script>
-    var inputName = document.getElementsByTagName('input')[0],
-        tipWord = document.getElementById('tip');
-    document.getElementsByTagName('input')[1].onclick = test;
-    document.onkeydown = function(e) {
+    var inputName = document.getElementsByTagName("input")[0],
+        tipWord = document.getElementById("tip");
+    document.getElementsByTagName("input")[1].onclick = test;   //点击按钮触发验证事件
+
+    //input内回车绑定验证事件
+    inputName.onkeydown = function(e) {
         if ((e.keyCode) == 13) {
             test();
         }
     };
+    //验证函数
     function test() {
         var inputValue = inputName.value;
-        if (countLength(inputValue) == 0) {
-            tipWord.innerHTML = '姓名不能为空';
-            tipWord.style.color = 'red';
-            inputName.style.border = '1px solid red';
-        } else if (countLength(inputValue) >=4 && countLength(inputValue) <= 16) {
-            tipWord.innerHTML = '格式正确';
-            tipWord.style.color = 'lightgreen';
-            inputName.style.border = '1px solid #0f0';
-        } else {
-            tipWord.innerHTML = '请输入长度为4~16位字符';
-            tipWord.style.color = 'red';
-            inputName.style.border = '1px solid red';
+        if (countLength(inputValue) == 0) {     //空字符串提示
+            tipWord.innerHTML = "姓名不能为空";
+            tipWord.style.color = "red";
+            inputName.style.border = "1px solid red";
+        } else if (countLength(inputValue) >=4 && countLength(inputValue) <= 16) {  //字符串长度在4-16之间提示
+            tipWord.innerHTML = "格式正确";
+            tipWord.style.color = "lightgreen";
+            inputName.style.border = "1px solid #0f0";
+        } else {    //字符串长度不在4-16之间提示
+            tipWord.innerHTML = "请输入长度为4~16位字符";
+            tipWord.style.color = "red";
+            inputName.style.border = "1px solid red";
         }
     }
-
+    //字符串长度值获取函数
     function countLength(str) {
         var inputLength = 0;
         for (var i = 0; i < str.length; i++) {
-            var countCode = str.charCodeAt(i);
+            var countCode = str.charCodeAt(i);  //将字符串转换为编码
             if (countCode >= 0x00 && countCode <= 0xff) {
-                inputLength += 1;
+                inputLength += 1;   //检测英文字符和数字，长度加1
             } else {
-                inputLength += 2;
+                inputLength += 2;   //检测到中文字符长度加2
             }
         }
         return inputLength;
