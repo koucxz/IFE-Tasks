@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>单个表单项的检验</title>
+    <style>
+        body {
+            width: 100%;
+            font-family: 'Microsoft Yahei',Arial,sans-serif;
+        }
+        input {
+            font-size: 1rem;
+            font-family: inherit;
+            outline: none;
+        }
+        input:nth-child(1){
+            padding-left: 10px;
+            width: 300px;
+            height: 40px;
+            border-radius: 5px;
+            border: 1px solid #a8a8a8;
+        }
+        input:nth-child(2){
+            width: 100px;
+            height: 50px;
+            color: white;
+            background-color: #2F79BA;
+            border: 2px solid white;
+            border-radius: 5px;
+        }
+        p {
+            padding-left: 2rem;
+            margin: 0;
+            color: #a8a8a8;
+        }
+    </style>
+</head>
+<body>
+    名称
+    <input id='msg' type="text">
+    <input type="button" value="验证">
+    <p id="tip">必填，长度为4~16个字符</p>
+<script>
+    var inputName = document.getElementsByTagName('input')[0],
+        tipWord = document.getElementById('tip');
+    document.getElementsByTagName('input')[1].onclick = test;
+    document.onkeydown = function(e) {
+        if ((e.keyCode) == 13) {
+            test();
+        }
+    };
+    function test() {
+        var inputValue = inputName.value;
+        if (countLength(inputValue) == 0) {
+            tipWord.innerHTML = '姓名不能为空';
+            tipWord.style.color = 'red';
+            inputName.style.border = '1px solid red';
+        } else if (countLength(inputValue) >=4 && countLength(inputValue) <= 16) {
+            tipWord.innerHTML = '格式正确';
+            tipWord.style.color = 'lightgreen';
+            inputName.style.border = '1px solid #0f0';
+        } else {
+            tipWord.innerHTML = '请输入长度为4~16位字符';
+            tipWord.style.color = 'red';
+            inputName.style.border = '1px solid red';
+        }
+    }
+
+    function countLength(str) {
+        var inputLength = 0;
+        for (var i = 0; i < str.length; i++) {
+            var countCode = str.charCodeAt(i);
+            if (countCode >= 0x00 && countCode <= 0xff) {
+                inputLength += 1;
+            } else {
+                inputLength += 2;
+            }
+        }
+        return inputLength;
+    }
+</script>
+</body>
+</html>
