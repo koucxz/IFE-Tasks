@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>多个表单项的动态校验</title>
+    <style>
+        body {
+            width: 100%;
+            font-family: "Microsoft Yahei",Arial,sans-serif;
+        }
+        ul {list-style: none;}
+        label {
+            display: inline-block;
+            padding-right: 10px;
+            width: 70px;
+            text-align: right;
+        }
+        input {
+            font-size: 1rem;
+            font-family: inherit;
+            outline: none;
+        }
+        input[type = "text"], input[type = "password"] {
+            padding-left: 10px;
+            width: 300px;
+            height: 40px;
+            border-radius: 5px;
+            border: 1px solid #bbb;
+        }
+        input[type = "button"] {
+            margin-left: 330px;
+            width: 80px;
+            height: 50px;
+            color: white;
+            background-color: #4f84ff;
+            border: 2px solid white;
+            border-radius: 5px;
+        }
+         p {
+            visibility: hidden;
+            padding-left: 5.2rem;
+            margin: 0;
+            color: #bbb;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li>
+        <label>名称</label>
+        <input id="msg1" type="text">
+        <p id="tip1">必填，长度为4~16个字符</p>
+    </li>
+    <li>
+        <label>密码</label>
+        <input id="msg2" type="password">
+        <p id="tip2">请输入密码</p>
+    </li>
+    <li>
+        <label>密码确认</label>
+        <input id="msg3" type="password">
+        <p id="tip3">再次输入相同密码</p>
+    </li>
+    <li>
+        <label>邮箱</label>
+        <input id="msg4" type="text">
+        <p id="tip4">请输入你的邮箱</p>
+    </li>
+    <li>
+        <label>手机</label>
+        <input id="msg5" type="text">
+        <p id="tip5">请输入你的手机号</p>
+    </li>
+    <input type="button" value="验证" id="check">
+</ul>
+<script>
+(function () {
+    var i = 0,
+        j,  //用于判断test结果的状态
+        list = document.getElementsByTagName("li"),
+        btn = document.getElementById("check");
+    for (i = 0;i < list.length;i++) {
+        var inputArea = list[i].getElementsByTagName("input")[0];
+        addEvent(inputArea, "focus", function () {  //输入框获取焦点时提示规则
+            this.parentNode.getElementsByTagName("p")[0].style.visibility = "visible";
+        });
+        addEvent(inputArea, "blur", function(){     //输入框失去焦点时验证规则
+            var self = this;    //将this存为值，在函数内部调用self指向inputArea
+            test(self.value,self,self.parentNode.getElementsByTagName("p")[0]);
+        });
+    }
+    addEvent(btn, "click", function(){  //按钮事件全局验证
+        [list].forEach(
+            function (e) {
+                var arr = [];
+                for (i = 0;i < e.length;i++) {
+                    e[i].getElementsByTagName("p")[0].style.visibility = "visible";
+                    test(e[i].getElementsByTagName("input")[0].value, e[i].getElementsByTagName("input")[0], e[i].getElementsByTagName("p")[0]);
+                    arr.push(j);
+                }
+                if (arr.sort().pop() == 1 && arr.sort().shift() == 1) {
+                    alert("输入正确");
+                } else {
+                    alert("输入有误");
+                }
+
+            }
+        )
+    });
+    //绑定事件函数
+    function addEvent(e, type, handler) {
+        if(e.addEventListener) {
+            e.addEventListener(type,handler, false);
+        } else if (e.attachEvent) {
+            e.attachEvent("on" + type, handler);
+        } else {
+            e[on + "type"] = handler;
+        }
+    }
+    //验证函数
+    function test(str,bd,tip) {
+        switch (bd.id) {
+            case "msg1":
+            case "msg2":
+                if (countLength(str) == 0) {     //空字符串提示
+                    tip.innerHTML = "输入不能为空";
+                    j = 0;
+                } else if (countLength(str) >=4 && countLength(str) <= 16) {  //字符串长度在4-16之间提示
+                    tip.innerHTML = "格式正确";
+                    j = 1;
+                } else {    //字符串长度不在4-16之间提示
+                    tip.innerHTML = "长度不符合4~16";
+                    j = 2;
+                }
+                break;
+            case "msg3":
+                if (countLength(list[1].getElementsByTagName("input")[0].value) <4 || countLength(list[1].getElementsByTagName("input")[0].value) > 16) {     //空字符串提示
+                    tip.innerHTML = "原密码输入错误";
+                    j = 0;
+                } else if (str == list[1].getElementsByTagName("input")[0].value) {
+                    tip.innerHTML = "密码输入一致";
+                    j = 1;
+                } else {
+                    tip.innerHTML = "密码输入不一致";
+                    j = 2;
+                }
+                break;
+            case "msg4":
+                if (countLength(str) == 0) {     //空字符串提示
+                    tip.innerHTML = "邮箱不能为空";
+                    j = 0;
+                } else if (/^.+@\w+\.\w+\.?\w+$/.test(str)) {  //字符串长度在4-16之间提示
+                    tip.innerHTML = "格式正确";
+                    j = 1;
+                } else {    //字符串长度不在4-16之间提示
+                    tip.innerHTML = "邮箱格式错误";
+                    j = 2;
+                }
+                break;
+            case "msg5":
+                if (countLength(str) == 0) {     //空字符串提示
+                    tip.innerHTML = "手机号不能为空";
+                    j = 0;
+                } else if (/^1[34578]\d{9}$/.test(str)) {  //字符串长度在4-16之间提示
+                    tip.innerHTML = "格式正确";
+                    j = 1;
+                } else {    //字符串长度不在4-16之间提示
+                    tip.innerHTML = "请输入正确的手机号";
+                    j = 2;
+                }
+                break;
+        }
+            if (j == 0) {
+                tip.style.color = "red";
+                bd.style.border = "1px solid red";
+            } else if (j == 1) {
+                tip.style.color = "#0a0";
+                bd.style.border = "1px solid #0a0";
+            } else if (j == 2) {
+                tip.style.color = "red";
+                bd.style.border = "1px solid red";
+            }
+    }
+    //字符串长度值获取函数
+    function countLength(str) {
+        var inputLength = 0;
+        for (var i = 0; i < str.length; i++) {
+            var countCode = str.charCodeAt(i);  //将字符串转换为编码
+            if (countCode >= 0x00 && countCode <= 0xff) {
+                inputLength += 1;   //检测英文字符和数字，长度加1
+            } else {
+            }
+        }
+        return inputLength;
+    }
+})();
+
+
+</script>
+</body>
+</html>
