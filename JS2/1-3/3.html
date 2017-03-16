@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>表单联动</title>
+    <style>
+        html{
+            font-size: 62.5%;
+        }
+        body, button, input, select, textarea {
+            font-family: "Microsoft YaHei",serif;
+            line-height:1;
+            outline:none;
+            font-size: 1.6rem;
+        }
+        body {text-align: center;}
+        div {margin: 100px 0;}
+        div#com {display: none;}
+        select {
+            padding: 3px;
+        }
+        input[type=radio] {
+            position: relative;
+            width: 18px;
+            height: 0;
+        }
+        /*before伪类产生选项样式*/
+        input[type=radio]::before {
+            position: absolute;
+            content: '';
+            top: -16px;
+            left: 0;
+            width: 18px;
+            height: 19px;
+            background-position: 0 0;
+            border: 1px solid gray;
+            border-radius: 50%;
+            box-sizing: border-box;
+        }
+        input[type=radio]:checked::before {
+            border: 5px solid deepskyblue;
+        }
+    </style>
+</head>
+<body>
+<div id="radios">
+    <label>
+        <input type="radio" name="radio" value="option1" checked>在校生
+    </label>
+    <label>
+        <input type="radio" name="radio" value="option2">非在校生
+    </label>
+</div>
+<div id="uni">
+    <label>你的城市：
+        <select id="city" name="city">
+            <option value="bj">北京</option>
+            <option value="sh">上海</option>
+        </select>
+    </label>
+    <label>你的学校：
+        <select id="school" name="school">
+            <option>北京大学</option>
+            <option>清华大学</option>
+            <option>北京航空航天大学</option>
+        </select>
+    </label>
+</div>
+<div id="com">
+    <label>公司名称：
+        <input type="text" id="company" name="company" placeholder="请输入公司名称">
+    </label>
+</div>
+<script>
+    var radioDiv = document.getElementById("radios"),
+        citySel = document.getElementById("city"),
+        uniDiv = document.getElementById("uni"),
+        comDiv = document.getElementById("com");
+    addEvent(radioDiv, "change", radioChange);
+    addEvent(citySel, "change", selectDistrict);
+    function radioChange() {
+        if (radioDiv.getElementsByTagName("input")[0].checked) {
+            uniDiv.style.display = "block";
+            comDiv.style.display = "none";
+        }
+        else {
+            uniDiv.style.display = "none";
+            comDiv.style.display = "block";
+        }
+    }
+
+    function selectDistrict() {
+        var data = {
+            bj: ["北京大学", "清华大学", "北京航空航天大学"],
+            sh: ["复旦大学", "上海交通大学", "同济大学"]
+        },
+        source = document.getElementById("city"),
+        target = document.getElementById("school"),
+        selected = source.options[source.selectedIndex].value;
+        target.innerHTML = "";
+        for (var i = 0; i < data[selected].length; i++) {
+            var opt = document.createElement('option');
+            opt.value = data[selected][i];
+            opt.innerHTML = data[selected][i];
+            target.appendChild(opt);
+        }
+    }
+    //绑定事件函数
+    function addEvent(e, type, handler) {
+        if(e.addEventListener) {
+            e.addEventListener(type,handler, false);
+        } else if (e.attachEvent) {
+            e.attachEvent("on" + type, handler);
+        } else {
+            e[on + "type"] = handler;
+        }
+    }
+</script>
+</body>
+</html>
