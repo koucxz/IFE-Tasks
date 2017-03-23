@@ -129,13 +129,13 @@
             tableUl.appendChild(tableLi);
         }
         // 画小方块
-        var oBlock = document.createElement('span');
-        tableBox.appendChild(oBlock);
-        oBlock.className = 'block';
+        var moveDiv = document.createElement('span');
+        tableBox.appendChild(moveDiv);
+        moveDiv.className = 'block';
         left = rnd(0,r)*w;
         top = rnd(0,c)*h;
-        oBlock.style.left = left+'px';
-        oBlock.style.top = top+'px';
+        moveDiv.style.left = left+'px';
+        moveDiv.style.top = top+'px';
 
         //操作
         btn.onclick = function(){
@@ -171,7 +171,7 @@
                         rotate -= 180;
                         break;
                 }
-                oBlock.style.WebkitTransform = 'rotate('+rotate+'deg)';
+                moveDiv.style.WebkitTransform = 'rotate('+rotate+'deg)';
             }
         };
 
@@ -181,8 +181,8 @@
             if(top >= w*(c-1))top = w*(c-1);
             if(left <= 0)left = 0;
             if(left >= h*(r-1))left = w*(c-1);
-            oBlock.style.left = left+'px';
-            oBlock.style.top = top+'px';
+            moveDiv.style.left = left+'px';
+            moveDiv.style.top = top+'px';
         }
         function getDir(rotate){
             var dir = (rotate/90)%4;
