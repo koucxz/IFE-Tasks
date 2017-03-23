@@ -116,24 +116,21 @@
         return parseInt(Math.random()*(m-n)+n);
     }
     window.onload = function(){
-        var oBox = document.getElementById('box');
-        var oUl = oBox.children[1];
-        var oTxt = document.getElementById('txt');
-        var oBtn = document.getElementById('btn');
-        var c = 10;
-        var r = 10;
-        var w = 50,h = 50;
-        var left = 0;
-        var top = 0;
-        var rotate = 0;
+        var tableBox = document.getElementById('box'),
+            tableUl = tableBox.getElementsByTagName("ul")[0],
+            inputTxt = document.getElementById('txt'),
+            btn = document.getElementById('btn'),
+            c = 10, r = 10,
+            w = 50, h = 50,
+            top = 0, left = 0,
+            rotate = 0;
         for(var i=0;i<c*r;i++){
-            var oLi = document.createElement('li');
-            oUl.appendChild(oLi);
-            // oLi.innerHTML = oLi.offsetLeft+', '+oLi.offsetTop;
+            var tableLi = document.createElement('li');
+            tableUl.appendChild(tableLi);
         }
         // 画小方块
         var oBlock = document.createElement('span');
-        oBox.appendChild(oBlock);
+        tableBox.appendChild(oBlock);
         oBlock.className = 'block';
         left = rnd(0,r)*w;
         top = rnd(0,c)*h;
@@ -141,8 +138,8 @@
         oBlock.style.top = top+'px';
 
         //操作
-        oBtn.onclick = function(){
-            var sValue = oTxt.value;
+        btn.onclick = function(){
+            var sValue = inputTxt.value;
             if(sValue == 'GO'){
                 var dir = getDir(rotate);
                 switch(dir){
