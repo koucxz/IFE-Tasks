@@ -39,8 +39,6 @@
         div#lightBox {
             display: none;
             position: fixed;
-            top: 50%;
-            left: 50%;
             margin-top: -115px;
             margin-left: -200px;
             width: 400px;
@@ -118,6 +116,8 @@
     //弹出函数
     function showBox() {
         mask.style.display = "block";
+        lightBox.style.top = "50%";
+        lightBox.style.left = "50%";
         lightBox.style.display = "block";
     }
     //关闭函数
