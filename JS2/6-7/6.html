@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>浮出层</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        div#wrap {
+            margin: 0 auto;
+            width: 710px;
+        }
+        div.idea {
+            padding: 0;
+            margin: 15px 0;
+            min-height: 118px;
+            width: 100%;
+            border: 0;
+            border-bottom: 2px solid #aaa;
+        }
+        div.idea img {
+            float: left;
+            margin: 0;
+        }
+        p.tips {
+            margin: 0 auto;
+            width: 710px;
+            font-size: 30px;
+        }
+        div#mask {
+            display: none;
+            position: fixed;
+            top:0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+        div#lightBox {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            margin-top: -115px;
+            margin-left: -200px;
+            width: 400px;
+            height: 230px;
+            background: #fff;
+            border: 2px solid #444;
+        }
+        div#lightBox h3 {
+            padding: 5px;
+            margin: 0;
+            background: #aaa;
+        }
+        div#lightBox p {
+            margin: 15px;
+        }
+        div#lightBox .btns {
+            position: absolute;
+            right: 10px;
+            bottom: 5px;
+        }
+        button {
+            padding: 10px 30px;
+            background: #aaa;
+            border: 2px solid #444;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <div class="idea">
+        <img src="http://www.w3school.com.cn/i/site_photoref.jpg" alt="完整的网站技术参考手册">
+        <h3>完整的网站技术参考手册</h3>
+        <p>我们的参考手册涵盖了网站技术的方方面面。</p>
+        <p>其中包括W3C的标准技术：HTML、CSS、XML 。以及其他的技术，诸如JavaScript、PHP、SQL等等。</p>
+    </div>
+    <div class="idea">
+        <img src="http://www.w3school.com.cn/i/site_photoexa.jpg" alt="在线实例测试工具">
+        <h3>在线实例测试工具</h3>
+        <p>在w3school，我们提供上千个实例。</p>
+        <p>通过使用我们的在线编辑器，你可以编辑这些例子，并对代码进行实验。</p>
+    </div>
+    <div class="idea">
+        <img src="http://www.w3school.com.cn/i/site_photoqe.jpg" alt="快捷易懂的学习方式">
+        <h3>快捷易懂的学习方式</h3>
+        <p>一寸光阴一寸金，因此，我们为您提供快捷易懂的学习内容。</p>
+        <p>在这里，您可以通过一种易懂的便利的模式获得您需要的任何知识。</p>
+    </div>
+</div>
+<p class="tips">点击上述内容中任意位置弹出浮动层</p>
+<div id="mask"></div>
+<div id="lightBox">
+    <h3>这是一个浮出层</h3>
+    <p>这是一个浮出层，可拖动<br/>
+    确定刷新，取消关闭<br/>
+    点击周围遮罩关闭</p>
+    <div class="btns">
+    <button id="ensure">确定</button>
+    <button id="cancel">取消</button>
+    </div>
+</div>
+<script>
+    var wrap = document.getElementById("wrap"),
+        mask = document.getElementById("mask"),
+        lightBox = document.getElementById("lightBox"),
+        lightTitle = lightBox.children[0],
+        btnOk = document.getElementById("ensure"),
+        btnCancel = document.getElementById("cancel");
+    addEvent(wrap, "click", showBox);
+    addEvent(btnOk, "click", function(){location.reload()});
+    addEvent(btnCancel, "click", hideBox);
+    addEvent(mask, "click", hideBox);
+    addEvent(lightTitle, "mousedown", setDrag);
+    addEvent(lightTitle, "mouseover", lightTitle.style.cursor = "move");
+    //弹出函数
+    function showBox() {
+        mask.style.display = "block";
+        lightBox.style.display = "block";
+    }
+    //关闭函数
+    function hideBox() {
+        mask.style.display = "none";
+        lightBox.style.display = "none";
+    }
+    function setDrag(event) {
+        var disX, disY;
+        event = event || window.event;
+        disX = event.clientX - lightBox.offsetLeft;
+        disY = event.clientY - lightBox.offsetTop;
+        document.onmousemove = function(event) {
+            event = event || window.event;
+            lightBox.style.left = event.clientX + 200 - disX + "px";
+            lightBox.style.top = event.clientY + 115 - disY + "px";
+        }
+        document.onmouseup = function() {
+            document.onmousedown = null;
+            document.onmousemove = null;
+        }
+    }
+    //绑定事件函数
+    function addEvent(e, type, handler) {
+        if(e.addEventListener) {
+            e.addEventListener(type,handler, false);
+        } else if (e.attachEvent) {
+            e.attachEvent("on" + type, handler);
+        } else {
+            e[on + "type"] = handler;
+        }
+    }
+</script>
+</body>
+</html>
