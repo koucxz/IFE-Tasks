@@ -125,6 +125,7 @@
         mask.style.display = "none";
         lightBox.style.display = "none";
     }
+    //拖曳函数
     function setDrag(event) {
         var disX, disY;
         event = event || window.event;
@@ -132,7 +133,7 @@
         disY = event.clientY - lightBox.offsetTop;
         document.onmousemove = function(event) {
             event = event || window.event;
-            lightBox.style.left = event.clientX + 200 - disX + "px";
+            lightBox.style.left = event.clientX + 200 - disX + "px";    //拾起块元素并避免跳跃
             lightBox.style.top = event.clientY + 115 - disY + "px";
         }
         document.onmouseup = function() {
