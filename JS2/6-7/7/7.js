@@ -16,13 +16,13 @@ var newUiTable = function () {
     var tr=document.createElement("tr");
     thead.appendChild(tr);
     for (var i = 0; i < data.thead.length; i++) {
-        var th=document.createElement('th');
+        var th=document.createElement("th");
         th.innerHTML=data.thead[i];
         tr.appendChild(th);
-        var upArrow=document.createElement('i');
+        var upArrow=document.createElement("i");
         upArrow.className="arrow-up";
         th.appendChild(upArrow);
-        var downArrow=document.createElement('i');
+        var downArrow=document.createElement("i");
         downArrow.className="arrow-down";
         th.appendChild(downArrow);
         if (data.wsort[i]==false) {
@@ -37,7 +37,7 @@ var newUiTable = function () {
         for (var i = 0; i < data.tbody.length; i++) {
             var tbodytr=document.createElement("tr");
             for (var j = 0; j < data.tbody[i].length; j++) {
-                var td=document.createElement('td');
+                var td=document.createElement("td");
                 td.innerHTML=data.tbody[i][j];
                 tbodytr.appendChild(td);
             }
@@ -60,7 +60,7 @@ var newUiTable = function () {
                 return 0;
             }
         });
-        table.removeChild(document.getElementsByTagName('tbody')[0]);
+        table.removeChild(document.getElementsByTagName("tbody")[0]);
         createTbody();
     }
     //降序
@@ -78,11 +78,11 @@ var newUiTable = function () {
                 return 0;
             }
         });
-        table.removeChild(document.getElementsByTagName('tbody')[0]);
+        table.removeChild(document.getElementsByTagName("tbody")[0]);
         createTbody();
     }
     //绑定升序onclick事件
-    var oAsc=document.getElementsByClassName('arrow-up');
+    var oAsc=document.getElementsByClassName("arrow-up");
     for (var i = 0; i < oAsc.length; i++) {
         oAsc[i].onclick=function(i){
             return function(){
@@ -91,7 +91,7 @@ var newUiTable = function () {
         }(i);
     }
     //绑定降序onclick事件
-    var oDesc=document.getElementsByClassName('arrow-down');
+    var oDesc=document.getElementsByClassName("arrow-down");
     for (var i = 0; i < oDesc.length; i++) {
         oDesc[i].onclick=function(i){
             return function(){
