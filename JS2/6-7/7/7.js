@@ -82,18 +82,18 @@ var newUiTable = function () {
         createTbody();
     }
     //绑定升序onclick事件
-    var oAsc=document.getElementsByClassName("arrow-up");
-    for (var i = 0; i < oAsc.length; i++) {
-        oAsc[i].onclick=function(i){
+    var upArrow=document.getElementsByClassName("arrow-up");
+    for (var i = 0; i < upArrow.length; i++) {
+        upArrow[i].onclick=function(i){
             return function(){
                 sortAsc(i);
             };
         }(i);
     }
     //绑定降序onclick事件
-    var oDesc=document.getElementsByClassName("arrow-down");
-    for (var i = 0; i < oDesc.length; i++) {
-        oDesc[i].onclick=function(i){
+    var downArrow=document.getElementsByClassName("arrow-down");
+    for (var i = 0; i < downArrow.length; i++) {
+        downArrow[i].onclick=function(i){
             return function(){
                 sortDesc(i);
             };
