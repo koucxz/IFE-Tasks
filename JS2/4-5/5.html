@@ -120,19 +120,22 @@
         MOV BOT：方向转向屏幕下面，向屏幕的下面移动一格<br/>
 </footer>
 <script>
-    function rnd(n,m){
+    function rnd(n,m) {
         return parseInt(Math.random()*(m-n)+n);
     }
-    window.onload = function(){
+    window.onload = function() {
         var tableBox = document.getElementById('box'),
             tableUl = tableBox.getElementsByTagName("ul")[0],
             inputTxt = document.getElementById('txt'),
             btn = document.getElementById('btn'),
-            c = 10, r = 10,
-            w = 50, h = 50,
-            top = 0, left = 0,
+            c = 10,
+            r = 10,
+            w = 50,
+            h = 50,
+            top = 0,
+            left = 0,
             rotate = 0;
-        for(var i=0;i<c*r;i++){
+        for(var i=0;i<c*r;i++) {
             var tableLi = document.createElement('li');
             tableUl.appendChild(tableLi);
         }
@@ -146,11 +149,11 @@
         moveDiv.style.top = top+'px';
 
         //操作
-        btn.onclick = function(){
+        btn.onclick = function() {
             var sValue = inputTxt.value;
-            if(sValue == 'GO'){
+            if(sValue == 'GO') {
                 var dir = getDir(rotate);
-                switch(dir){
+                switch(dir) {
                     case 0:
                         top -= 50;
                         break;
@@ -166,9 +169,9 @@
                 }
                 go();
             }
-            if(sValue.indexOf('TUN') != -1){
+            if(sValue.indexOf('TUN') != -1) {
                 // 转向
-                switch(sValue){
+                switch(sValue) {
                     case 'TUN LEF':
                         rotate -= 90;
                         break;
@@ -181,9 +184,9 @@
                 }
                 moveDiv.style.WebkitTransform = 'rotate('+rotate+'deg)';
             }
-            if(sValue.indexOf('TRA') != -1){
+            if(sValue.indexOf('TRA') != -1) {
                 // 平移
-                switch(sValue){
+                switch(sValue) {
                     case 'TRA LEF':
                         left -= w;
                         break;
@@ -200,33 +203,32 @@
                 go();
             }
 
-            if(sValue.indexOf('MOV') != -1){
+            if(sValue.indexOf('MOV') != -1) {
                 // 转弯并直行
                 var dir = getDir(rotate);
-                //after work
-                switch(sValue){
+                switch(sValue) {
                     case 'MOV LEF':
-                        if(dir == 0)rotate -= 90;
-                        if(dir == 2)rotate += 90;
-                        if(dir == 1)rotate += 180;
+                        if(dir == 0) {rotate -= 90;}
+                        if(dir == 1) {rotate += 180;}
+                        if(dir == 2) {rotate += 90;}
                         left -= w;
                         break;
                     case 'MOV TOP':
-                        if(dir == 1)rotate -= 90;
-                        if(dir == 2)rotate += 180;
-                        if(dir == 3)rotate += 90;
+                        if(dir == 1) {rotate -= 90;}
+                        if(dir == 2) {rotate += 180;}
+                        if(dir == 3) {rotate += 90;}
                         top -= h;
                         break;
                     case 'MOV RIG':
-                        if(dir == 0)rotate += 90;
-                        if(dir == 2)rotate -= 90;
-                        if(dir == 3)rotate += 180;
+                        if(dir == 0) {rotate += 90;}
+                        if(dir == 2) {rotate -= 90;}
+                        if(dir == 3) {rotate += 180;}
                         left += w;
                         break;
                     case 'MOV BOT':
-                        if(dir == 0)rotate+= 180;
-                        if(dir == 1)rotate += 90;
-                        if(dir == 3)rotate -= 90;
+                        if(dir == 0) {rotate += 180;}
+                        if(dir == 1) {rotate += 90;}
+                        if(dir == 3) {rotate -= 90;}
                         top += h;
                         break;
                 }
@@ -236,15 +238,15 @@
         };
 
 
-        function go(){
-            if(top <= 0)top = 0;
-            if(top >= w*(c-1))top = w*(c-1);
-            if(left <= 0)left = 0;
-            if(left >= h*(r-1))left = w*(c-1);
+        function go() {
+            if(top <= 0) {top = 0;}
+            if(top >= w*(c-1)) {top = w*(c-1);}
+            if(left <= 0) {left = 0;}
+            if(left >= h*(r-1)) {left = w*(c-1);
             moveDiv.style.left = left+'px';
             moveDiv.style.top = top+'px';
         }
-        function getDir(rotate){
+        function getDir(rotate) {
             var dir = (rotate/90)%4;
             if (dir < 0) {
                 dir = dir + 4;
