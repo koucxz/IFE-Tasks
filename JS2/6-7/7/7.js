@@ -10,35 +10,35 @@ var data = {
 };
 var newUiTable = function () {
     //创建表格
-    var table=document.getElementById("ui-table");
-    var thead=document.createElement("thead");
+    var table = document.getElementById("ui-table");
+    var thead = document.createElement("thead");
     table.appendChild(thead);
-    var tr=document.createElement("tr");
+    var tr = document.createElement("tr");
     thead.appendChild(tr);
     for (var i = 0; i < data.thead.length; i++) {
-        var th=document.createElement("th");
-        th.innerHTML=data.thead[i];
+        var th = document.createElement("th");
+        th.innerHTML = data.thead[i];
         tr.appendChild(th);
-        var upArrow=document.createElement("i");
-        upArrow.className="arrow-up";
+        var upArrow = document.createElement("i");
+        upArrow.className = "arrow-up";
         th.appendChild(upArrow);
-        var downArrow=document.createElement("i");
-        downArrow.className="arrow-down";
+        var downArrow = document.createElement("i");
+        downArrow.className = "arrow-down";
         th.appendChild(downArrow);
-        if (data.wsort[i]==false) {
-            upArrow.style.display="none";
-            downArrow.style.display="none";
+        if (data.wsort[i] == false) {
+            upArrow.style.display = "none";
+            downArrow.style.display = "none";
         }
     }
     //创建表格主体
     function createTbody(){
-        var tbody=document.createElement("tbody");
+        var tbody = document.createElement("tbody");
         table.appendChild(tbody);
         for (var i = 0; i < data.tbody.length; i++) {
-            var tbodytr=document.createElement("tr");
+            var tbodytr = document.createElement("tr");
             for (var j = 0; j < data.tbody[i].length; j++) {
-                var td=document.createElement("td");
-                td.innerHTML=data.tbody[i][j];
+                var td = document.createElement("td");
+                td.innerHTML = data.tbody[i][j];
                 tbodytr.appendChild(td);
             }
             tbody.appendChild(tbodytr);
@@ -47,53 +47,37 @@ var newUiTable = function () {
     createTbody();
     //升序
     function sortAsc(index){
-        var arr=[];
-        arr=data.tbody;
+        var arr = [];
+        arr = data.tbody;
         arr.sort(function(row1,row2){
-            var val1=row1[index];
-            var val2=row2[index];
-            if (val1<val2){
-                return -1;
-            }else if(val1>val2){
-                return 1;
-            }else{
-                return 0;
-            }
+            return row1[index] - row2[index];
         });
         table.removeChild(document.getElementsByTagName("tbody")[0]);
         createTbody();
     }
     //降序
     function sortDesc(index){
-        var arr=[];
-        arr=data.tbody;
+        var arr = [];
+        arr = data.tbody;
         arr.sort(function(row1,row2){
-            var val1=row1[index];
-            var val2=row2[index];
-            if (val1>val2){
-                return -1;
-            }else if(val1<val2){
-                return 1;
-            }else{
-                return 0;
-            }
+            return row2[index] - row1[index];
         });
         table.removeChild(document.getElementsByTagName("tbody")[0]);
         createTbody();
     }
     //绑定升序onclick事件
-    var upArrow=document.getElementsByClassName("arrow-up");
+    var upArrow = document.getElementsByClassName("arrow-up");
     for (var i = 0; i < upArrow.length; i++) {
-        upArrow[i].onclick=function(i){
+        upArrow[i].onclick = function(i){
             return function(){
                 sortAsc(i);
             };
         }(i);
     }
     //绑定降序onclick事件
-    var downArrow=document.getElementsByClassName("arrow-down");
+    var downArrow = document.getElementsByClassName("arrow-down");
     for (var i = 0; i < downArrow.length; i++) {
-        downArrow[i].onclick=function(i){
+        downArrow[i].onclick = function(i){
             return function(){
                 sortDesc(i);
             };
