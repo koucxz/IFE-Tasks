@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>鼠标悬浮模糊</title>
+<style>
+    body {
+        margin: 0;
+        background: #222;
+    }
+    .main {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -155px 0 0 -281px;
+        width: 562px;
+        height: 310px;
+        background: url(bg.png) no-repeat;
+        background-size: cover;
+    }
+    .btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -100px 0 0 -175px;
+        width: 350px;
+        height: 200px;
+        text-align: center;
+        text-decoration: none;
+        z-index: 1;
+    }
+    .btn div {
+        margin-top: 60px;
+        opacity: 0;
+        transition: all 1s;
+    }
+    .btn:hover div{
+        margin-top: 0;
+        opacity: 1;
+    }
+    .btn::before, .btn::after {
+        display: block;
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        box-sizing: border-box;
+        transition: all 1.5s;
+    }
+    .btn::before {
+        top: 0;
+        left: 50%;
+        height: 200px;
+        border-top: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+    .btn::after {
+        top: 50%;
+        left: 0;
+        width: 350px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+    }
+    .btn:hover::before {
+        top: 0;
+        left: 0;
+        width: 350px;
+    }
+    .btn:hover::after {
+        top: 0;
+        left: 0;
+        height: 200px;
+    }
+
+    .btn:hover~.main {
+        filter: blur(5px);
+        -webkit-filter: blur(5px);
+        -moz-filter: blur(5px);
+        -ms-filter: blur(5px);
+        transition: all .8s;
+    }
+    h1 {
+        margin: 40px 0 50px;
+        font-size: 26px;
+        background-image: -webkit-linear-gradient(left,#D81159, #E53A40 10%, #FFBC42 20%, #75D701 30%, #30A9DE 40%,#D81159 50%, #E53A40 60%, #FFBC42 70%, #75D701 80%, #30A9DE 90%,#D81159);
+        color:transparent;
+        -webkit-background-clip: text;
+        background-size: 200% 100%;
+        animation: flowlight 5s linear infinite;
+    }
+    p {
+        font-size: 22px;
+        font-weight: bold;
+        color:transparent;
+        -webkit-background-clip: text;
+        background-size: 200% 100%;
+        animation: change 2s infinite;
+    }
+    @keyframes flowlight {
+        0% {
+            background-position: 0 0;
+        }
+        100% {
+            background-position: -100% 0;
+        }
+    }
+    @keyframes change {
+        0% {
+            color: #4f84ff;
+        }
+        100% {
+            color: #418c59;
+        }
+    }
+</style>
+</head>
+<body>
+<a href="http://ife.baidu.com" class="btn">
+    <div>
+        <h1>欢迎参加百度前端技术学院</h1>
+        <p>点击报名</p>
+    </div>
+</a>
+<div class="main">
+</div>
+</body>
+</html>
