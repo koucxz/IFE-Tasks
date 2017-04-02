@@ -46,6 +46,8 @@ p.convert = function (key, val) {
     })
 };
 
+let app = new Observer({});
+
 let app1 = new Observer({
     name: 'youngwind',
     age: 25
