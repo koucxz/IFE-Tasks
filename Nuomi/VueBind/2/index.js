@@ -2,14 +2,28 @@
 // 观察者构造函数
 function Observer(data) {
     this.data = data;
-    this.makeObserver(data);
+    this.walk(data);
     this.eventsBus = new Event();
 }
 
 let p = Observer.prototype;
 
 // 此函数用于深层次遍历对象的各个属性
-p.setterAndGetter = function (key, val) {
+p.walk = function (obj) {
+    let val;
+    for(let key in obj){
+        if(obj.hasOwnProperty(key)){
+            val = obj[key];
+            //深度遍历
+            if(typeof val === 'object'){
+                new Observer(val);
+            }
+        }
+        this.convert(key, val);
+    }
+}
+
+p.convert = function (key, val) {
     let self = this;
     Object.defineProperty(this.data, key, {
         enumerable: true,
@@ -30,19 +44,6 @@ p.setterAndGetter = function (key, val) {
     })
 }
 
-p.makeObserver = function (obj) {
-    let val;
-    for(let key in obj){
-        if(obj.hasOwnProperty(key)){
-            val = obj[key];
-            //深度遍历
-            if(typeof val === 'object'){
-                new Observer(val);
-            }
-        }
-        this.setterAndGetter(key, val);
-    }
-}
 
 p.$watch = function(attr, callback){
     this.eventsBus.on(attr, callback);
