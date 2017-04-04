@@ -61,14 +61,6 @@ Event.prototype.on = function(attr, callback){
     }
 }
 
-Event.prototype.off = function(attr){
-    for(let key in this.events){
-        if(this.events.hasOwnProperty(key) && key === attr){
-            delete this.events[key];
-        }
-    }
-}
-
 Event.prototype.emit = function(attr, ...arg){
     this.events[attr] && this.events[attr].forEach(function(item){
         item(...arg);
