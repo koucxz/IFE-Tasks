@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS3折叠面板</title>
+<style>
+    body {
+        font-family: "Helvetica Neue", Arial, "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+    .container {
+        margin: 30px auto;
+        width: 70%;
+    }
+    .panel-group {
+        margin-bottom: 20px;
+    }
+    .panel-group .panel {
+        margin-bottom: 5px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    .panel input{
+        display: none;
+    }
+    .panel .panel-head {
+        display: block;
+        padding: 10px 15px;
+        color: #333;
+        background-color: #f5f5f5;
+        border-color: #ddd;
+        cursor: pointer;
+    }
+    .panel input:checked~.panel-collapse {
+        height: 120px;
+    }
+    .panel .panel-collapse {
+        overflow: hidden;
+        height: 0;
+        transition: all .4s;
+        border-top-color: #ddd;
+    }
+    .panel .panel-body {
+        padding: 15px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="panel-group">
+        <div class="panel">
+            <input type="radio" name='panel-heads' id='panelHead1'>
+            <label for="panelHead1" class="panel-head">Collapsible Group Item #1</label>
+            <div class="panel-collapse" aria-labelledby="panelHead1">
+                <div class="panel-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            <input type="radio" name='panel-heads' id='panelHead2'>
+            <label for="panelHead2" class="panel-head">Collapsible Group Item #2</label>
+            <div class="panel-collapse" aria-labelledby="panelHead2">
+                <div class="panel-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            <input type="radio" name='panel-heads' id='panelHead3'>
+            <label for="panelHead3" class="panel-head">Collapsible Group Item #3</label>
+            <div class="panel-collapse" aria-labelledby="panelHead3">
+                <div class="panel-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
