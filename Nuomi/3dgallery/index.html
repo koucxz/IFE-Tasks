@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS 3D轮播图</title>
+    <style>
+        .stage {
+            width: 100%;
+            perspective: 2000px;
+            transition: top .5s;
+            position: relative;
+        }
+
+        .container {
+            width: 400px;
+            height: 300px;
+            margin-left: -192px;
+            transition: -webkit-transform 1s;
+            transition: transform 1s;
+            transform-style: preserve-3d;
+            position: absolute;
+            left: 50%;
+        }
+
+        .pic {
+            width: 400px;
+            transition: opacity 1s, transform 1s;
+            position: absolute;
+            bottom: 0;
+            box-shadow: 0 1px 5px 0px;
+        }
+    </style>
+</head>
+<body>
+    <div id="stage" class="stage">
+        <div id="container" class="container">
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
